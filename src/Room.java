@@ -16,11 +16,33 @@ public class Room {
 
     public boolean temperatureSettings() {
         if (airConditioning) {
-            if (temperature > LIMIT_TEMPERATURE) {
-                temperature--;
-                return true;
-            } else if (temperature == LIMIT_TEMPERATURE) {
-                return false;
+            if (cubicArea <= 100) {
+                if (temperature > LIMIT_TEMPERATURE) {
+                    temperature = temperature - 3 * airConditioningPerformance;
+                    if (temperature <= LIMIT_TEMPERATURE)
+                        return false;
+                    return true;
+                } else if (temperature == LIMIT_TEMPERATURE) {
+                    return false;
+                }
+            } else if (cubicArea > 130) {
+                if (temperature > LIMIT_TEMPERATURE) {
+                    temperature = temperature - 2 * airConditioningPerformance;
+                    if (temperature <= LIMIT_TEMPERATURE)
+                        return false;
+                    return true;
+                } else if (temperature == LIMIT_TEMPERATURE) {
+                    return false;
+                }
+            } else if (cubicArea >= 150) {
+                if (temperature > LIMIT_TEMPERATURE) {
+                    temperature = temperature - 1 * airConditioningPerformance;
+                    if (temperature <= LIMIT_TEMPERATURE)
+                        return false;
+                    return true;
+                } else if (temperature == LIMIT_TEMPERATURE) {
+                    return false;
+                }
             }
         }
         return false;
@@ -68,5 +90,10 @@ public class Room {
 
     public static double getLimitTemperature() {
         return LIMIT_TEMPERATURE;
+    }
+
+    @Override
+    public String toString() {
+        return "Temperature: " + temperature;
     }
 }
