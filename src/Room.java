@@ -14,27 +14,15 @@ public class Room {
         this.cubicArea = cubicArea;
     }
 
-    private boolean settings(boolean status, int n) {
-        if (temperature > LIMIT_TEMPERATURE) {
-            double tmp = temperature;
-            temperature = temperature - n * airConditioningPerformance;
-            if (temperature <= LIMIT_TEMPERATURE) {
-                temperature = tmp;
-                status = false;
-            }
-        }
-        return status;
-    }
-
-    public boolean temperatureSettings() {
+    public boolean cooling() {
         boolean status = false;
         if (airConditioning) {
             if (cubicArea <= 100) {
-                status = settings(true, 3);
+                status = coolingSettings(true, 3);
             } else if ((cubicArea > 100) && (cubicArea < 150)) {
-                status = settings(true, 2);
+                status = coolingSettings(true, 2);
             } else if (cubicArea >= 150) {
-                status = settings(true, 1);
+                status = coolingSettings(true, 1);
             }
         }
         return status;
@@ -87,5 +75,17 @@ public class Room {
     @Override
     public String toString() {
         return "Temperature: " + temperature;
+    }
+
+    private boolean coolingSettings(boolean status, int n) {
+        if (temperature > LIMIT_TEMPERATURE) {
+            double tmp = temperature;
+            temperature = temperature - n * airConditioningPerformance;
+            if (temperature <= LIMIT_TEMPERATURE) {
+                temperature = tmp;
+                status = false;
+            }
+        }
+        return status;
     }
 }

@@ -8,23 +8,23 @@ public class Main {
         room[4] = new Room(37, true, 1, 19, 96.2 );
 
         System.out.println(room[0].toString());
-        System.out.println(room[0].temperatureSettings());
+        System.out.println(room[0].cooling());
         System.out.println(room[0].toString() + " (after cooling)\n");
 
         System.out.println(room[1].toString());
-        System.out.println(room[1].temperatureSettings());
+        System.out.println(room[1].cooling());
         System.out.println(room[1].toString() + " (after cooling)\n");
 
         System.out.println(room[2].toString());
-        System.out.println(room[2].temperatureSettings());
+        System.out.println(room[2].cooling());
         System.out.println(room[2].toString() + " (after cooling)\n");
 
         System.out.println(room[3].toString());
-        System.out.println(room[3].temperatureSettings());
+        System.out.println(room[3].cooling());
         System.out.println(room[3].toString() + " (after cooling)\n");
 
         System.out.println(room[4].toString());
-        System.out.println(room[4].temperatureSettings());
+        System.out.println(room[4].cooling());
         System.out.println(room[4].toString() + " (after cooling)\n");
 
 
