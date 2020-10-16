@@ -14,38 +14,30 @@ public class Room {
         this.cubicArea = cubicArea;
     }
 
-    public boolean temperatureSettings() {
-        if (airConditioning) {
-            if (cubicArea <= 100) {
-                if (temperature > LIMIT_TEMPERATURE) {
-                    temperature = temperature - 3 * airConditioningPerformance;
-                    if (temperature <= LIMIT_TEMPERATURE)
-                        return false;
-                    return true;
-                } else if (temperature == LIMIT_TEMPERATURE) {
-                    return false;
-                }
-            } else if (cubicArea > 130) {
-                if (temperature > LIMIT_TEMPERATURE) {
-                    temperature = temperature - 2 * airConditioningPerformance;
-                    if (temperature <= LIMIT_TEMPERATURE)
-                        return false;
-                    return true;
-                } else if (temperature == LIMIT_TEMPERATURE) {
-                    return false;
-                }
-            } else if (cubicArea >= 150) {
-                if (temperature > LIMIT_TEMPERATURE) {
-                    temperature = temperature - 1 * airConditioningPerformance;
-                    if (temperature <= LIMIT_TEMPERATURE)
-                        return false;
-                    return true;
-                } else if (temperature == LIMIT_TEMPERATURE) {
-                    return false;
-                }
+    private boolean settings(boolean status, int n) {
+        if (temperature > LIMIT_TEMPERATURE) {
+            double tmp = temperature;
+            temperature = temperature - n * airConditioningPerformance;
+            if (temperature <= LIMIT_TEMPERATURE) {
+                temperature = tmp;
+                status = false;
             }
         }
-        return false;
+        return status;
+    }
+
+    public boolean temperatureSettings() {
+        boolean status = false;
+        if (airConditioning) {
+            if (cubicArea <= 100) {
+                status = settings(true, 3);
+            } else if ((cubicArea > 100) && (cubicArea < 150)) {
+                status = settings(true, 2);
+            } else if (cubicArea >= 150) {
+                status = settings(true, 1);
+            }
+        }
+        return status;
     }
 
     public double getApartmentSize() {
